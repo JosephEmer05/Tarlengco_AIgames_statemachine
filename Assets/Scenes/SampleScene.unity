@@ -689,6 +689,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &984633982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7643530983623257039, guid: fdb0290aeebba5343a87fcec708dd2ae, type: 3}
+  m_PrefabInstance: {fileID: 1752411828}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &984633983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984633982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ddc5372e6c4d2249ab018fda5d9b68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  target: {fileID: 1068638553}
+  patrolPoints:
+  - {fileID: 1577129643}
+  - {fileID: 721821657}
+  - {fileID: 1264525733}
+  - {fileID: 1185214148}
+  - {fileID: 1510342370}
+  - {fileID: 202217091}
+  - {fileID: 2046726406}
+  - {fileID: 1620022870}
+  - {fileID: 1453334473}
+  detectionRange: 5
+  loseRange: 7
+  waypointTolerance: 1
+  idleAtWaypointSeconds: 1
 --- !u!1 &1068638549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,7 +1142,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7643530983623257039, guid: fdb0290aeebba5343a87fcec708dd2ae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 984633983}
   m_SourcePrefab: {fileID: 100100000, guid: fdb0290aeebba5343a87fcec708dd2ae, type: 3}
 --- !u!1 &2046726404
 GameObject:
