@@ -57,8 +57,8 @@ public class EnemyAI : MonoBehaviour
 
     private class ActionNode : Node
     {
-        private readonly Func<Node> action;
-        public ActionNode (Func<Node> action) => this.action = action;
+        private readonly Func<NodeStates> action;
+        public ActionNode (Func<NodeStates> action) => this.action = action;
         public override NodeStates Tick() => action();
     }
 
@@ -138,19 +138,45 @@ public class EnemyAI : MonoBehaviour
         return NodeStates.Success;
     }
 
-    private NodeStates Patrol()
+   private NodeStates Patrol()
     {
-        if(isChasing) return NodeStates.Failure;
-        Transform current = patrolPoints[PatrolIndex];
-        if(current == null) return NodeStates.Failure;
+        if (isChasing) return NodeStates.Failure;
 
-        if(idleTimer > 0f)
+        Transform current = patrolPoints[PatrolIndex];
+        if (current == null) return NodeStates.Failure;
+
+        if (idleTimer > 0f)
         {
             agent.isStopped = true;
             idleTimer -= Time.deltaTime;
             return NodeStates.Running;
         }
 
+        agent.isStopped = false;
+        agent.SetDestination(current.position);
 
+        if (!agent.pathPending && agent.remainingDistance <= waypointTolerance)
+        {
+            idleTimer = idleAtWaypointSeconds;
+            PatrolIndex = (PatrolIndex + 1) % patrolPoints.Length;
+        }
+
+        return NodeStates.Running;
+    }
+
+    private NodeStates Idle()
+    {
+        agent.isStopped = true;
+        return NodeStates.Running;
+    }
+
+    // Visualize detection and lose ranges in the Scene view
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, loseRange);
     }
 }
